@@ -1,12 +1,12 @@
 package words
 
 import (
-	"testing"
 	"strconv"
+	"testing"
 )
 
 var (
-	chanCount int = 10	
+	chanCount int = 10
 )
 
 func TestDuplicate(t *testing.T) {
@@ -18,7 +18,7 @@ func TestDuplicate(t *testing.T) {
 	input <- "test"
 	Duplicate(input, outputs...)
 	for i := 0; i < chanCount; i++ {
-		message, ok := <- outputs[i]
+		message, ok := <-outputs[i]
 		if !ok {
 			t.Errorf("output channel closed")
 		}
@@ -28,7 +28,7 @@ func TestDuplicate(t *testing.T) {
 	}
 	close(input)
 	for i := 0; i < chanCount; i++ {
-		_, ok := <- outputs[i]
+		_, ok := <-outputs[i]
 		if ok {
 			t.Errorf("output channel was not closed after input was")
 		}
@@ -50,5 +50,5 @@ func TestMerge(t *testing.T) {
 	}
 	if count != chanCount {
 		t.Errorf("Merged channel had %d messages instead of %d", count, chanCount)
-	}	
+	}
 }

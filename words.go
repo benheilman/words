@@ -23,14 +23,14 @@ func Matcher(length int, in <-chan string) <-chan string {
 
 func Duplicate(input <-chan string, outputs ...chan string) {
 	go func() {
-	for in := range input {
-		for _, o := range outputs {
-			o <- in
+		for in := range input {
+			for _, o := range outputs {
+				o <- in
+			}
 		}
-	}
-	for _, o := range outputs {
-		close(o)
-	}
+		for _, o := range outputs {
+			close(o)
+		}
 	}()
 }
 

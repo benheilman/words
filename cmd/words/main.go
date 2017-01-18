@@ -2,10 +2,10 @@
 package main
 
 import (
+	"fmt"
 	"github.com/mitchellh/go-linereader"
 	"os"
 	"words"
-	"fmt"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 		outs = append(outs, out)
 		ins = append(ins, words.Matcher(i, out))
 	}
-		
+
 	merged := words.Merge(ins...)
 	words.Duplicate(linereader.New(os.Stdin).Ch, outs...)
 	for o := range merged {
